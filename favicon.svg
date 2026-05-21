@@ -1,0 +1,7 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ANIQRC">
+  <circle cx="200" cy="200" r="192" fill="#0A0A0A"/>
+  <rect x="183" y="86" width="34" height="228" fill="#F4F2EC"/>
+  <rect x="86" y="183" width="228" height="34" fill="#F4F2EC"/>
+  <circle cx="200" cy="200" r="12" fill="#E63946"/>
+  <g transform="translate(200,200) rotate(45)"><rect x="54" y="-16" width="104" height="32" fill="#E63946"/></g>
+</svg>

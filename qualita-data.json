@@ -153,5 +153,27 @@
     "categorie": ["Italia", "Media UE", "Media OCSE"],
     "valori": [6.2, 8.5, 9.2],
     "colore": "#E63946"
+  },
+
+  "lesioni": {
+    "titolo": "Lesioni da pressione — prevalenza (studi italiani)",
+    "sub": "Indicatore nursing-sensitive per eccellenza. L'Italia non ha un registro nazionale unico: i valori provengono da studi multicentrici e regionali, di periodi diversi.",
+    "unita": "%",
+    "fonte": "AISLeC, indagine nazionale 2010; studio Umbria 2020 (Professioni Infermieristiche); hospice IT (Hendrichova et al.)",
+    "url": "https://www.aislec.it",
+    "categorie": ["Area medica (Umbria 2020)", "Indagine naz. AISLeC 2010", "Hospice (IT)"],
+    "valori": [9.9, 19.5, 22.9],
+    "colore": "#C98A1E"
+  },
+
+  "violenza": {
+    "titolo": "Violenza sugli operatori sanitari — quota sugli eventi sentinella",
+    "sub": "Gli atti di violenza a danno degli operatori sono in forte crescita tra il 5° e il 6° Rapporto: una priorità di sicurezza per chi assiste, oltre che per chi è assistito.",
+    "unita": "% sul totale eventi",
+    "fonte": "Ministero della Salute — 5° e 6° Rapporto di Monitoraggio Eventi Sentinella",
+    "url": "https://www.salute.gov.it/imgs/C_17_pubblicazioni_3356_allegato.pdf",
+    "categorie": ["5° Rapporto (2005–2012)", "6° Rapporto (2005–2020)"],
+    "valori": [8.6, 13.9],
+    "colore": "#E63946"
   }
 }

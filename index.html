@@ -974,6 +974,41 @@
 @keyframes vtIn { from { opacity:0; transform: translateX(100%); } to { opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce){ ::view-transition-old(root),::view-transition-new(root){ animation:none; } }
 
+
+/* === MINI-OSSERVATORIO (home) === */
+.mini-obs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:44px 0 8px;}
+@media(max-width:760px){.mini-obs{grid-template-columns:1fr;gap:16px;}}
+.mo-stat{background:var(--bg-card);border:1px solid var(--rule);border-radius:12px;padding:30px 28px;}
+.mo-num{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(40px,6vw,54px);line-height:1;letter-spacing:-.03em;color:var(--accent);}
+.mo-lab{font-size:14px;color:var(--ink-soft);line-height:1.5;margin-top:12px;}
+.mo-lab span{color:var(--ink-mute);}
+/* === AUTOVALUTAZIONE === */
+.sub-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(22px,3vw,28px);letter-spacing:-.02em;color:var(--ink);margin:6px 0 0;}
+.quiz-card{background:var(--bg-card);border:1px solid var(--rule);border-radius:14px;padding:30px 30px;margin-top:44px;}
+.q-item{padding:20px 0;border-bottom:1px solid var(--rule);}
+.q-item:first-child{padding-top:4px;}
+.q-q{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:17px;color:var(--ink);margin-bottom:14px;line-height:1.4;}
+.q-q .qn{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:14px;margin-right:8px;}
+.q-opts{display:flex;gap:10px;flex-wrap:wrap;}
+.q-opt{font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;padding:9px 24px;border-radius:100px;border:1.5px solid var(--rule);background:transparent;color:var(--ink-soft);cursor:pointer;transition:all .2s;}
+.q-opt:hover{border-color:var(--ink);color:var(--ink);}
+.q-opt.sel{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+.quiz-result{max-height:0;overflow:hidden;opacity:0;transition:opacity .5s,max-height .5s,margin .5s,padding .5s;}
+.quiz-result.show{opacity:1;max-height:420px;margin-top:26px;padding:28px;background:var(--ink);color:var(--bg);border-radius:12px;}
+.qr-score{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:46px;line-height:1;color:#fff;}
+.qr-band{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;margin:8px 0 10px;}
+.qr-tip{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.78);}
+.qr-tip a{color:#fff;text-decoration:underline;}
+.quiz-note{font-size:12.5px;color:var(--ink-mute);margin-top:16px;}
+/* === TIMELINE === */
+.timeline{position:relative;margin-top:48px;padding-left:34px;}
+.timeline::before{content:'';position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--rule);}
+.tl-item{position:relative;padding:0 0 34px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{content:'';position:absolute;left:-30px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);}
+.tl-year{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:.04em;}
+.tl-h{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:19px;color:var(--ink);margin:4px 0 6px;letter-spacing:-.01em;}
+.tl-p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);max-width:620px;}
 </style>
 <script>document.documentElement.className += ' js';</script>
 </head>
@@ -1177,6 +1212,36 @@
         <a class="ctx-link" href="https://www.gazzettaufficiale.it/eli/id/2017/08/10/17A05598/sg" target="_blank" rel="noopener">Consulta il D.M. 2 agosto 2017 →</a>
       </div>
     </div>
+
+    <div class="ctx-fonti reveal" style="margin-top:50px;border-top:1px solid var(--rule);padding-top:42px;">
+      <div class="sec-label">Fonti istituzionali</div>
+      <p class="sec-intro" style="margin-top:6px;">Le fonti ufficiali su sicurezza delle cure, rischio clinico e professione infermieristica. Sempre disponibili, a prescindere dal flusso di notizie.</p>
+      <div class="fonti-list" style="margin-top:24px;">
+        <a class="fonte" href="https://www.salute.gov.it/portale/sicurezzacure/homeSicurezzaCure.jsp" target="_blank" rel="noopener"><div class="fonte-main"><div class="fonte-name">Ministero della Salute</div><div class="fonte-desc">Sicurezza delle cure e gestione del rischio clinico · Raccomandazioni ministeriali</div></div><div class="fonte-arrow">↗</div></a>
+        <a class="fonte" href="https://www.agenas.gov.it/" target="_blank" rel="noopener"><div class="fonte-main"><div class="fonte-name">AGENAS</div><div class="fonte-desc">Agenzia Nazionale per i Servizi Sanitari Regionali · Qualità e sicurezza delle cure</div></div><div class="fonte-arrow">↗</div></a>
+        <a class="fonte" href="https://www.buonepratichesicurezzasanita.it/" target="_blank" rel="noopener"><div class="fonte-main"><div class="fonte-name">Osservatorio Buone Pratiche</div><div class="fonte-desc">Osservatorio nazionale delle buone pratiche sulla sicurezza nella sanità</div></div><div class="fonte-arrow">↗</div></a>
+        <a class="fonte" href="https://www.fnopi.it/" target="_blank" rel="noopener"><div class="fonte-main"><div class="fonte-name">FNOPI</div><div class="fonte-desc">Federazione Nazionale degli Ordini delle Professioni Infermieristiche</div></div><div class="fonte-arrow">↗</div></a>
+        <a class="fonte" href="https://www.iss.it/" target="_blank" rel="noopener"><div class="fonte-main"><div class="fonte-name">Istituto Superiore di Sanità</div><div class="fonte-desc">Ricerca, sorveglianza e linee guida del Sistema Nazionale (SNLG)</div></div><div class="fonte-arrow">↗</div></a>
+        <a class="fonte" href="https://www.who.int/health-topics/patient-safety" target="_blank" rel="noopener"><div class="fonte-main"><div class="fonte-name">WHO — Patient Safety</div><div class="fonte-desc">Organizzazione Mondiale della Sanità · Sicurezza del paziente a livello globale</div></div><div class="fonte-arrow">↗</div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="sec-pad" id="storia-sicurezza">
+  <div class="wrap">
+    <div class="sec-label reveal">La storia, in breve</div>
+    <h2 class="sec-title reveal">Vent'anni di <span class="accent">sicurezza delle cure</span>.</h2>
+    <p class="sec-intro reveal">Le tappe che hanno costruito, in Italia e nel mondo, la cultura della qualità e del rischio clinico.</p>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-year">1999</div><div class="tl-h">«To Err Is Human»</div><div class="tl-p">Il rapporto dell'Institute of Medicine porta l'errore in sanità al centro del dibattito: nasce l'approccio sistemico, che cerca le cause nei processi e non nel colpevole.</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2005–2008</div><div class="tl-h">Le prime Raccomandazioni ministeriali</div><div class="tl-p">Il Ministero della Salute avvia le Raccomandazioni per la sicurezza dei pazienti: indicazioni operative per prevenire gli eventi avversi più gravi.</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2015</div><div class="tl-h">DM 70 — standard ospedalieri</div><div class="tl-p">Vengono definiti gli standard qualitativi, strutturali e quantitativi dell'assistenza ospedaliera, con soglie di volume ed esito.</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2017</div><div class="tl-h">Legge Gelli-Bianco (L. 24/2017)</div><div class="tl-p">La sicurezza delle cure diventa parte costitutiva del diritto alla salute. Il DM 2 agosto 2017 affida a società e associazioni tecnico-scientifiche l'elaborazione delle linee guida.</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2022</div><div class="tl-h">DM 77 — assistenza territoriale</div><div class="tl-p">La riforma dell'assistenza territoriale ridisegna i servizi di prossimità, con un ruolo crescente dell'infermiere nella continuità delle cure.</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2025</div><div class="tl-h">Spazio Europeo dei Dati Sanitari (EHDS)</div><div class="tl-p">Il Regolamento UE 2025/327 apre la stagione della condivisione e del riuso dei dati sanitari: governance, qualità del dato e tutela del cittadino diventano centrali.</div></div>
+    </div>
   </div>
 </section>
 
@@ -1219,11 +1284,17 @@
 <!-- ============ STRUMENTI (Osservatorio + Toolkit) ============ -->
 <section class="sec-pad" id="strumenti">
   <div class="wrap">
-    <div class="sec-label reveal">Strumenti</div>
+    <div class="sec-label reveal">Osservatorio · dati in tempo reale</div>
     <h2 class="sec-title reveal">Dai principi ai <span class="accent">dati</span>.</h2>
     <p class="sec-intro reveal">Due strumenti vivi al servizio della comunità: un osservatorio che legge la qualità delle cure in Italia attraverso i dati ufficiali, e un toolkit operativo per chi misura, valuta e fa ricerca.</p>
 
-    <div class="manifesto-cards reveal" style="margin-top:52px;">
+    <div class="mini-obs reveal">
+      <div class="mo-stat"><div class="mo-num" data-to="59" data-dec="0" data-suffix="%">0</div><div class="mo-lab">Fratture di femore operate entro 48h <span>· mediana naz. 2023</span></div></div>
+      <div class="mo-stat"><div class="mo-num" data-to="6,2" data-dec="1" data-suffix="">0</div><div class="mo-lab">Infermieri ogni 1.000 abitanti — sotto la media UE (8,5) <span>· 2021</span></div></div>
+      <div class="mo-stat"><div class="mo-num" data-to="13" data-dec="0" data-suffix="/21">0</div><div class="mo-lab">Regioni promosse nei LEA in tutte le aree <span>· 2022</span></div></div>
+    </div>
+
+    <div class="manifesto-cards reveal" style="margin-top:40px;">
       <a data-fx href="osservatorio.html" style="position:relative;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;background:var(--ink);color:var(--bg);border-radius:10px;padding:40px 36px;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 50px var(--shadow)';" onmouseout="this.style.transform='';this.style.boxShadow='';">
         <span style="position:absolute;bottom:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(230,57,70,0.18) 0%,transparent 70%);pointer-events:none;"></span>
         <span style="position:relative;z-index:2;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--accent);margin-bottom:18px;">01 — OSSERVATORIO</span>
@@ -1238,6 +1309,24 @@
         <span style="font-size:14.5px;color:var(--ink-soft);line-height:1.6;">Calcolatori che funzionano nel browser (Kappa di Cohen, dimensione del campione), una libreria di strumenti validati (PROM, PREM, Q-DIO, MMAT, PRISMA-ScR) e le 19 Raccomandazioni ministeriali per la sicurezza dei pazienti.</span>
         <span style="margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--accent);">Apri gli strumenti &rarr;</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTOVALUTAZIONE ============ -->
+<section class="sec-pad" id="autovalutazione" style="background:var(--bg-warm);">
+  <div class="wrap">
+    <div class="sec-label reveal">Mettiti alla prova</div>
+    <h2 class="sec-title reveal">Quanto è sicura la tua <span class="accent">pratica</span>?</h2>
+    <p class="sec-intro reveal">Cinque domande rapide sulla sicurezza delle cure: rispondi e ottieni subito un punteggio con qualche spunto. Resta tutto nel tuo browser, nessun dato viene inviato.</p>
+    <div class="quiz-card reveal" id="autoQuiz">
+      <div class="q-item" data-q="1"><div class="q-q"><span class="qn">01</span>Nella tua struttura si applica la checklist di sala operatoria (o un'analoga verifica pre-procedura)?</div><div class="q-opts"><button class="q-opt" data-v="1">Sì</button><button class="q-opt" data-v="0">No</button></div></div>
+      <div class="q-item" data-q="2"><div class="q-q"><span class="qn">02</span>Esiste un sistema di segnalazione degli eventi avversi e dei near-miss di tipo non punitivo?</div><div class="q-opts"><button class="q-opt" data-v="1">Sì</button><button class="q-opt" data-v="0">No</button></div></div>
+      <div class="q-item" data-q="3"><div class="q-q"><span class="qn">03</span>Viene effettuata la riconciliazione della terapia nei passaggi di cura (ingresso, trasferimento, dimissione)?</div><div class="q-opts"><button class="q-opt" data-v="1">Sì</button><button class="q-opt" data-v="0">No</button></div></div>
+      <div class="q-item" data-q="4"><div class="q-q"><span class="qn">04</span>Il personale riceve formazione periodica su sicurezza delle cure e gestione del rischio clinico?</div><div class="q-opts"><button class="q-opt" data-v="1">Sì</button><button class="q-opt" data-v="0">No</button></div></div>
+      <div class="q-item" data-q="5"><div class="q-q"><span class="qn">05</span>I farmaci ad alto rischio (es. potassio concentrato, farmaci LASA) sono gestiti con precauzioni dedicate?</div><div class="q-opts"><button class="q-opt" data-v="1">Sì</button><button class="q-opt" data-v="0">No</button></div></div>
+      <div class="quiz-result" id="quizResult"></div>
+      <p class="quiz-note">Strumento divulgativo di auto-riflessione, non una valutazione formale.</p>
     </div>
   </div>
 </section>
@@ -1258,11 +1347,11 @@
 </section>
 
 <!-- ============ VIDEO ============ -->
-<section class="sec-pad" id="video">
+<section class="sec-pad" id="media" style="background:var(--bg-warm);">
   <div class="wrap">
-    <div class="sec-label reveal">Video</div>
-    <h2 class="sec-title reveal">Due voci sulla <span class="accent">qualità</span> delle cure.</h2>
-    <p class="sec-intro reveal">Dal mondo con l'Institute for Healthcare Improvement, e dall'Italia con la FNOPI. I flussi si aggiornano in tempo reale.</p>
+    <div class="sec-label reveal">Media</div>
+    <h2 class="sec-title reveal">Guarda e ascolta la <span class="accent">qualità</span> che cambia.</h2>
+    <p class="sec-intro reveal">Voci dal mondo (Institute for Healthcare Improvement) e dall'Italia (FNOPI), più i podcast italiani su professione, rischio e innovazione in sanità. I flussi si aggiornano in tempo reale.</p>
 
     <div class="video-channels reveal">
       <div class="video-channel">
@@ -1275,16 +1364,9 @@
       </div>
     </div>
     <p class="news-note">Fonti: canali YouTube ufficiali di IHI e FNOPI. I video rimandano a YouTube.</p>
-  </div>
-</section>
 
-<!-- ============ PODCAST ============ -->
-<section class="sec-pad" id="podcast" style="background:var(--bg-warm);">
-  <div class="wrap">
-    <div class="sec-label reveal">Podcast</div>
-    <h2 class="sec-title reveal">Ascolta la <span class="accent">sanità</span> che cambia.</h2>
-    <p class="sec-intro reveal">Podcast italiani su professione infermieristica, management, rischio e innovazione in sanità. Ascolta su Spotify o Apple Podcasts.</p>
-
+    <div class="sec-label reveal" style="margin-top:58px;">Podcast</div>
+    <h3 class="sub-title reveal">Ascolta la <span class="accent">sanità</span> che cambia.</h3>
     <div class="podcast-wrap reveal">
       <div class="pod-embed">
         <iframe src="https://open.spotify.com/embed/show/4hyO8ns6R9km6pZWLNVLoF?utm_source=generator" width="100%" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Medcast Italia"></iframe>
@@ -1315,60 +1397,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FONTI ISTITUZIONALI ============ -->
-<section class="sec-pad" id="fonti">
-  <div class="wrap">
-    <div class="sec-label reveal">Fonti istituzionali</div>
-    <h2 class="sec-title reveal">Punti di riferimento <span class="accent">stabili</span>.</h2>
-    <p class="sec-intro reveal">Le fonti ufficiali sulla sicurezza delle cure, il rischio clinico e la professione infermieristica. Sempre disponibili, a prescindere dal flusso di notizie.</p>
-
-    <div class="fonti-list reveal">
-      <a class="fonte" href="https://www.salute.gov.it/portale/sicurezzacure/homeSicurezzaCure.jsp" target="_blank" rel="noopener">
-        <div class="fonte-main">
-          <div class="fonte-name">Ministero della Salute</div>
-          <div class="fonte-desc">Sicurezza delle cure e gestione del rischio clinico · Raccomandazioni ministeriali</div>
-        </div>
-        <div class="fonte-arrow">↗</div>
-      </a>
-      <a class="fonte" href="https://www.agenas.gov.it/" target="_blank" rel="noopener">
-        <div class="fonte-main">
-          <div class="fonte-name">AGENAS</div>
-          <div class="fonte-desc">Agenzia Nazionale per i Servizi Sanitari Regionali · Qualità e sicurezza delle cure</div>
-        </div>
-        <div class="fonte-arrow">↗</div>
-      </a>
-      <a class="fonte" href="https://www.buonepratichesicurezzasanita.it/" target="_blank" rel="noopener">
-        <div class="fonte-main">
-          <div class="fonte-name">Osservatorio Buone Pratiche</div>
-          <div class="fonte-desc">Osservatorio nazionale delle buone pratiche sulla sicurezza nella sanità</div>
-        </div>
-        <div class="fonte-arrow">↗</div>
-      </a>
-      <a class="fonte" href="https://www.fnopi.it/" target="_blank" rel="noopener">
-        <div class="fonte-main">
-          <div class="fonte-name">FNOPI</div>
-          <div class="fonte-desc">Federazione Nazionale degli Ordini delle Professioni Infermieristiche</div>
-        </div>
-        <div class="fonte-arrow">↗</div>
-      </a>
-      <a class="fonte" href="https://www.iss.it/" target="_blank" rel="noopener">
-        <div class="fonte-main">
-          <div class="fonte-name">Istituto Superiore di Sanità</div>
-          <div class="fonte-desc">Ricerca, sorveglianza e linee guida del Sistema Nazionale (SNLG)</div>
-        </div>
-        <div class="fonte-arrow">↗</div>
-      </a>
-      <a class="fonte" href="https://www.who.int/health-topics/patient-safety" target="_blank" rel="noopener">
-        <div class="fonte-main">
-          <div class="fonte-name">WHO — Patient Safety</div>
-          <div class="fonte-desc">Organizzazione Mondiale della Sanità · Sicurezza del paziente a livello globale</div>
-        </div>
-        <div class="fonte-arrow">↗</div>
-      </a>
     </div>
   </div>
 </section>
@@ -1533,8 +1561,7 @@
         <a href="toolkit.html">Toolkit</a>
         <a href="eventi.html">Eventi</a>
         <a href="#news">News</a>
-        <a href="#video">Video</a>
-        <a href="#podcast">Podcast</a>
+        <a href="#media">Media</a>
         <a href="#documenti">Documenti</a>
         <a href="adesione.html">Adesione</a>
         <a href="privacy.html">Privacy</a>
@@ -1845,6 +1872,48 @@
   VIDEO_CHANNELS.forEach(loadChannel);
 </script>
 
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(n,d){ return n.toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d}); }
+  // mini-osservatorio count-up
+  var nums = document.querySelectorAll('.mo-num[data-to]');
+  if (nums.length) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(!e.isIntersecting) return; var el=e.target; io.unobserve(el);
+      var target=parseFloat((el.dataset.to||'0').replace(',','.'));
+      var dec=parseInt(el.dataset.dec||'0',10), suf=el.dataset.suffix||'', pre=el.dataset.prefix||'';
+      if(reduce||isNaN(target)){ el.textContent=pre+(isNaN(target)?(el.dataset.to||''):fmt(target,dec))+suf; return; }
+      var dur=1300,t0=null;
+      function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); var eased=1-Math.pow(1-p,3);
+        el.textContent=pre+fmt(target*eased,dec)+suf; if(p<1)requestAnimationFrame(step); else el.textContent=pre+fmt(target,dec)+suf; }
+      requestAnimationFrame(step);
+    });},{threshold:0.5});
+    nums.forEach(function(el){ io.observe(el); });
+  }
+  // autovalutazione quiz
+  var quiz = document.getElementById('autoQuiz');
+  if (quiz) {
+    var items = quiz.querySelectorAll('.q-item'), ans = {};
+    quiz.addEventListener('click', function(e){
+      var b = e.target.closest('.q-opt'); if(!b) return;
+      var it = b.closest('.q-item'), qi = it.dataset.q;
+      it.querySelectorAll('.q-opt').forEach(function(x){ x.classList.remove('sel'); });
+      b.classList.add('sel'); ans[qi] = parseInt(b.dataset.v,10);
+      if (Object.keys(ans).length === items.length) {
+        var score = Object.keys(ans).reduce(function(a,k){ return a+ans[k]; },0), max = items.length;
+        var band, tip;
+        if (score>=4){ band='Cultura della sicurezza matura'; tip='Ottimo presidio: continua a misurare e a valorizzare i dati. <a href="osservatorio.html">Osservatorio</a> e <a href="toolkit.html">Toolkit</a> ti aiutano a migliorare ancora.'; }
+        else if (score>=2){ band='Buona base, con margini'; tip='Ci sono leve concrete su cui agire: parti dalle <a href="toolkit.html">19 Raccomandazioni</a> e dagli strumenti del Toolkit per colmare i punti scoperti.'; }
+        else { band='Diverse priorità da rafforzare'; tip='Conviene ripartire dalle basi della sicurezza delle cure: le <a href="toolkit.html">Raccomandazioni</a> e i materiali ANIQRC sono un buon punto di partenza.'; }
+        var r = document.getElementById('quizResult');
+        r.innerHTML = '<div class="qr-score">'+score+'/'+max+'</div><div class="qr-band">'+band+'</div><div class="qr-tip">'+tip+'</div>';
+        r.classList.add('show');
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>
 

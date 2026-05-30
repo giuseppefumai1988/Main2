@@ -1048,10 +1048,52 @@
 .nav-search:hover{ border-color:var(--accent); color:var(--accent); }
 .nav-search svg{ width:17px; height:17px; display:block; }
 @media (max-width:860px){ .nav-links a.nav-search{ display:inline-flex; } }
+
+/* ===== B (premium) + C (dark mode + spotlight) ===== */
+/* paper grain */
+.grain{ position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+html[data-theme="dark"] .grain{ mix-blend-mode:screen; opacity:.06; }
+/* hero living aurora */
+.hero::after{ animation:aurora 16s ease-in-out infinite alternate; }
+@keyframes aurora{ 0%{ transform:translate(0,0) scale(1); } 100%{ transform:translate(-26px,18px) scale(1.12); } }
+/* theme toggle */
+.nav-theme{ padding:0; cursor:pointer; font:inherit; }
+.nav-theme .ic-sun{ display:none; }
+.nav-theme .ic-moon{ display:block; }
+html[data-theme="dark"] .nav-theme .ic-sun{ display:block; }
+html[data-theme="dark"] .nav-theme .ic-moon{ display:none; }
+/* DARK TOKENS */
+html[data-theme="dark"]{ --bg:#15140F; --bg-warm:#1C1A14; --bg-card:#201E18; --ink:#F2EFE8; --ink-soft:#CFC9BD; --ink-mute:#938E83; --rule:#34322B; --rule-soft:#2A2822; --shadow:rgba(0,0,0,0.5); --accent:#F2616E; --accent-deep:#E63946; }
+html[data-theme="dark"] body{ background:var(--bg); }
+html[data-theme="dark"] nav{ background:rgba(21,20,15,0.82); }
+html[data-theme="dark"] .manifesto{ background:#100F0B; color:#F2EFE8; }
+html[data-theme="dark"] .nl-card{ background:#100F0B; }
+html[data-theme="dark"] .quiz-result.show{ background:#100F0B; }
+html[data-theme="dark"] a[data-fx]{ background:#201E18 !important; color:#F2EFE8 !important; border:1px solid var(--rule) !important; }
+html[data-theme="dark"] .ask-cta{ background:var(--accent); color:#0A0A0A; }
+html[data-theme="dark"] svg circle[r="160"]{ fill:#201E18; }
+/* TITLE WIPE */
+.sec-title.wipe{ position:relative; display:inline-block; }
+.sec-title.wipe .t{ opacity:0; }
+.sec-title.wipe.in .t{ opacity:1; transition:opacity .01s .4s; }
+.sec-title.wipe::after{ content:''; position:absolute; inset:0; background:var(--accent); transform:scaleX(0); transform-origin:left center; pointer-events:none; }
+.sec-title.wipe.in::after{ animation:secWipe .9s cubic-bezier(.7,0,.2,1) forwards; }
+@keyframes secWipe{ 0%{transform:scaleX(0);transform-origin:left center;} 45%{transform:scaleX(1);transform-origin:left center;} 55%{transform:scaleX(1);transform-origin:right center;} 100%{transform:scaleX(0);transform-origin:right center;} }
+/* MAGNETIC */
+.magnetic{ transition:transform .25s cubic-bezier(.2,.8,.2,1); will-change:transform; }
+/* SPOTLIGHT */
+.manifesto .wrap{ position:relative; z-index:1; }
+.nl-card > .nl-left, .nl-card > .nl-right{ position:relative; z-index:1; }
+.spot{ position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .35s; z-index:0; background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.10), transparent 62%); }
+.nl-card > .spot, .manifesto > .spot{ z-index:0; }
+.spot.on{ opacity:1; }
+@media (prefers-reduced-motion:reduce){ .sec-title.wipe .t{ opacity:1; } .sec-title.wipe::after{ display:none; } .magnetic{ transition:none; } .spot{ display:none; } .hero::after{ animation:none; } }
 </style>
-<script>document.documentElement.className += ' js';</script>
+<script>document.documentElement.className += ' js';try{if(localStorage.getItem('aniqrc-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
 <nav id="nav">
@@ -1076,6 +1118,7 @@
       <a href="eventi.html">Eventi</a>
       <a href="#documenti">Documenti</a>
       <a href="#assistente" class="nav-search" id="navSearch" aria-label="Cerca nel sito" title="Cerca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></a>
+      <button type="button" class="nav-search nav-theme" id="navTheme" aria-label="Cambia tema chiaro/scuro" title="Tema chiaro/scuro"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.3 1.3M17.7 17.7L19 19M19 5l-1.3 1.3M6.3 17.7L5 19"/></svg></button>
       <a href="#newsletter" class="nav-cta nav-news"><span class="nl-full">Iscriviti alla newsletter</span><span class="nl-short">Newsletter</span></a>
       <a href="adesione.html" class="nav-cta">Associati</a>
     </div>
@@ -1116,7 +1159,7 @@
       </div>
     </div>
 
-    <p class="hero-lead">
+    <p data-editable="source" data-path="/index.html" data-key="hero-lead" class="hero-lead">
       La comunità degli infermieri italiani che lavorano sulla <strong>qualità dell'assistenza</strong>, sul <strong>rischio clinico</strong>, sullo sviluppo di <strong>procedure e protocolli</strong> e sulla <strong>ricerca</strong> per la sicurezza delle cure.
     </p>
 
@@ -1193,7 +1236,7 @@
 <section class="sec-pad" id="ambiti">
   <div class="wrap">
     <div class="sec-label reveal">I quattro ambiti</div>
-    <h2 class="sec-title reveal">Una sola comunità,<br>quattro <span class="accent">discipline</span> che si parlano.</h2>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-1" class="sec-title reveal">Una sola comunità,<br>quattro <span class="accent">discipline</span> che si parlano.</h2>
 
     <div class="ambiti-grid reveal">
       <div class="ambito">
@@ -1224,8 +1267,8 @@
 <section class="sec-pad" id="contesto" style="background:var(--bg-warm);">
   <div class="wrap">
     <div class="sec-label reveal">Contesto</div>
-    <h2 class="sec-title reveal">Su cosa <span class="accent">poggiamo</span>.</h2>
-    <p class="sec-intro reveal">Quattro pietre miliari, scientifiche e normative, che fondano il lavoro sulla qualità e sul rischio clinico in Italia.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-2" class="sec-title reveal">Su cosa <span class="accent">poggiamo</span>.</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-1" class="sec-intro reveal">Quattro pietre miliari, scientifiche e normative, che fondano il lavoro sulla qualità e sul rischio clinico in Italia.</p>
 
     <div class="contesto-grid reveal">
       <div class="ctx">
@@ -1273,8 +1316,8 @@
 <section class="sec-pad" id="storia-sicurezza">
   <div class="wrap">
     <div class="sec-label reveal">La storia, in breve</div>
-    <h2 class="sec-title reveal">Vent'anni di <span class="accent">sicurezza delle cure</span>.</h2>
-    <p class="sec-intro reveal">Le tappe che hanno costruito, in Italia e nel mondo, la cultura della qualità e del rischio clinico.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-3" class="sec-title reveal">Vent'anni di <span class="accent">sicurezza delle cure</span>.</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-2" class="sec-intro reveal">Le tappe che hanno costruito, in Italia e nel mondo, la cultura della qualità e del rischio clinico.</p>
     <div class="timeline">
       <div class="tl-item reveal"><div class="tl-year">1999</div><div class="tl-h">«To Err Is Human»</div><div class="tl-p">Il rapporto dell'Institute of Medicine porta l'errore in sanità al centro del dibattito: nasce l'approccio sistemico, che cerca le cause nei processi e non nel colpevole.</div></div>
       <div class="tl-item reveal"><div class="tl-year">2005–2008</div><div class="tl-h">Le prime Raccomandazioni ministeriali</div><div class="tl-p">Il Ministero della Salute avvia le Raccomandazioni per la sicurezza dei pazienti: indicazioni operative per prevenire gli eventi avversi più gravi.</div></div>
@@ -1290,7 +1333,7 @@
 <section class="sec-pad" id="attivita">
   <div class="wrap">
     <div class="sec-label reveal">Cosa facciamo</div>
-    <h2 class="sec-title reveal">Dalla teoria alla <span class="accent">pratica</span>.</h2>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-4" class="sec-title reveal">Dalla teoria alla <span class="accent">pratica</span>.</h2>
 
     <div class="attivita-list reveal">
       <a class="att-row att-link" href="https://www.forumriskmanagement.it/index.php/convegni" target="_blank" rel="noopener">
@@ -1326,8 +1369,8 @@
 <section class="sec-pad" id="strumenti">
   <div class="wrap">
     <div class="sec-label reveal">Osservatorio · dati in tempo reale</div>
-    <h2 class="sec-title reveal">Dai principi ai <span class="accent">dati</span>.</h2>
-    <p class="sec-intro reveal">Due strumenti vivi al servizio della comunità: un osservatorio che legge la qualità delle cure in Italia attraverso i dati ufficiali, e un toolkit operativo per chi misura, valuta e fa ricerca.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-5" class="sec-title reveal">Dai principi ai <span class="accent">dati</span>.</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-3" class="sec-intro reveal">Due strumenti vivi al servizio della comunità: un osservatorio che legge la qualità delle cure in Italia attraverso i dati ufficiali, e un toolkit operativo per chi misura, valuta e fa ricerca.</p>
 
     <div class="mini-obs reveal">
       <div class="mo-stat"><div class="mo-num" data-to="59" data-dec="0" data-suffix="%">0</div><div class="mo-lab">Fratture di femore operate entro 48h <span>· mediana naz. 2023</span></div></div>
@@ -1358,8 +1401,8 @@
 <section class="sec-pad" id="autovalutazione" style="background:var(--bg-warm);">
   <div class="wrap">
     <div class="sec-label reveal">Mettiti alla prova</div>
-    <h2 class="sec-title reveal">Quanto è sicura la tua <span class="accent">pratica</span>?</h2>
-    <p class="sec-intro reveal">Cinque domande rapide sulla sicurezza delle cure: rispondi e ottieni subito un punteggio con qualche spunto. Resta tutto nel tuo browser, nessun dato viene inviato.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-6" class="sec-title reveal">Quanto è sicura la tua <span class="accent">pratica</span>?</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-4" class="sec-intro reveal">Cinque domande rapide sulla sicurezza delle cure: rispondi e ottieni subito un punteggio con qualche spunto. Resta tutto nel tuo browser, nessun dato viene inviato.</p>
     <div class="quiz-card reveal" id="autoQuiz">
       <div class="q-item" data-q="1"><div class="q-q"><span class="qn">01</span>Nella tua struttura si applica la checklist di sala operatoria (o un'analoga verifica pre-procedura)?</div><div class="q-opts"><button class="q-opt" data-v="1">Sì</button><button class="q-opt" data-v="0">No</button></div></div>
       <div class="q-item" data-q="2"><div class="q-q"><span class="qn">02</span>Esiste un sistema di segnalazione degli eventi avversi e dei near-miss di tipo non punitivo?</div><div class="q-opts"><button class="q-opt" data-v="1">Sì</button><button class="q-opt" data-v="0">No</button></div></div>
@@ -1376,8 +1419,8 @@
 <section class="sec-pad" id="news">
   <div class="wrap">
     <div class="sec-label reveal">Aggiornamenti</div>
-    <h2 class="sec-title reveal">News dal <span class="accent">nursing</span> e dal rischio clinico.</h2>
-    <p class="sec-intro reveal">Una rassegna automatica da fonti italiane di informazione sanitaria e infermieristica, aggiornata in tempo reale. Le notizie rimandano agli articoli originali.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-7" class="sec-title reveal">News dal <span class="accent">nursing</span> e dal rischio clinico.</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-5" class="sec-intro reveal">Una rassegna automatica da fonti italiane di informazione sanitaria e infermieristica, aggiornata in tempo reale. Le notizie rimandano agli articoli originali.</p>
 
     <div id="news-list" class="news-grid reveal">
       <div class="news-loading">Caricamento delle notizie in corso…</div>
@@ -1391,8 +1434,8 @@
 <section class="sec-pad" id="media" style="background:var(--bg-warm);">
   <div class="wrap">
     <div class="sec-label reveal">Media</div>
-    <h2 class="sec-title reveal">Guarda e ascolta la <span class="accent">qualità</span> che cambia.</h2>
-    <p class="sec-intro reveal">Voci dal mondo (Institute for Healthcare Improvement) e dall'Italia (FNOPI), più i podcast italiani su professione, rischio e innovazione in sanità. I flussi si aggiornano in tempo reale.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-8" class="sec-title reveal">Guarda e ascolta la <span class="accent">qualità</span> che cambia.</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-6" class="sec-intro reveal">Voci dal mondo (Institute for Healthcare Improvement) e dall'Italia (FNOPI), più i podcast italiani su professione, rischio e innovazione in sanità. I flussi si aggiornano in tempo reale.</p>
 
     <div class="video-channels reveal">
       <div class="video-channel">
@@ -1446,7 +1489,7 @@
 <section class="direttivo sec-pad" id="direttivo">
   <div class="wrap">
     <div class="sec-label reveal">Consiglio direttivo</div>
-    <h2 class="sec-title reveal">I soci <span class="accent">fondatori</span>.</h2>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-9" class="sec-title reveal">I soci <span class="accent">fondatori</span>.</h2>
 
     <div class="dir-grid reveal">
       <div class="dir-card pres">
@@ -1497,8 +1540,8 @@
 <section class="sec-pad" id="documenti" style="background:var(--bg-warm);">
   <div class="wrap">
     <div class="sec-label reveal">Documenti</div>
-    <h2 class="sec-title reveal">Statuto e <span class="accent">modulistica</span>.</h2>
-    <p class="sec-intro reveal">I documenti istituzionali dell'Associazione, scaricabili in PDF. In fase di costituzione: i testi recano campi da completare a fondazione avvenuta.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-10" class="sec-title reveal">Statuto e <span class="accent">modulistica</span>.</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-7" class="sec-intro reveal">I documenti istituzionali dell'Associazione, scaricabili in PDF. In fase di costituzione: i testi recano campi da completare a fondazione avvenuta.</p>
 
     <div class="doc-grid reveal">
       <a class="doc-card" href="documenti/Statuto_ANIQRC.pdf" target="_blank" rel="noopener">
@@ -1572,8 +1615,8 @@
 <section class="sec-pad" id="assistente" style="background:var(--bg-warm);padding-top:60px;padding-bottom:60px;">
   <div class="wrap" style="max-width:760px;">
     <div class="sec-label reveal">Assistente ANIQRC</div>
-    <h2 class="sec-title reveal" style="font-size:clamp(26px,4vw,38px);">Cosa stai <span class="accent">cercando</span>?</h2>
-    <p class="sec-intro reveal" style="margin-bottom:0;">Scrivi una domanda e ti porto subito nella sezione giusta. Tutto nel browser, senza inviare nulla.</p>
+    <h2 data-editable="source" data-path="/index.html" data-key="title-11" class="sec-title reveal" style="font-size:clamp(26px,4vw,38px);">Cosa stai <span class="accent">cercando</span>?</h2>
+    <p data-editable="source" data-path="/index.html" data-key="intro-8" class="sec-intro reveal" style="margin-bottom:0;">Scrivi una domanda e ti porto subito nella sezione giusta. Tutto nel browser, senza inviare nulla.</p>
     <div class="ask reveal" style="margin-top:26px;max-width:100%;">
       <div class="ask-bar">
         <input id="askInput" type="text" autocomplete="off" placeholder="Chiedimi qualcosa… es. come mi associo?" aria-label="Fai una domanda" />
@@ -2118,6 +2161,61 @@
   });
   var navSearch=document.getElementById('navSearch');
   if(navSearch){ navSearch.addEventListener('click', function(e){ e.preventDefault(); var sec=document.getElementById('assistente'); if(sec){ sec.scrollIntoView({behavior:'smooth',block:'start'}); setTimeout(function(){ try{ input.focus({preventScroll:true}); }catch(_){ input.focus(); } }, 650); } }); }
+})();
+</script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = !window.matchMedia || matchMedia('(pointer:fine)').matches;
+
+  // THEME TOGGLE + persistence
+  var meta=document.querySelector('meta[name="theme-color"]');
+  function applyMeta(){ if(meta) meta.setAttribute('content', root.getAttribute('data-theme')==='dark' ? '#15140F' : '#0A0A0A'); }
+  applyMeta();
+  var tbtn=document.getElementById('navTheme');
+  if(tbtn){ tbtn.addEventListener('click', function(){
+    var isDark = root.getAttribute('data-theme')==='dark';
+    if(isDark){ root.removeAttribute('data-theme'); try{localStorage.setItem('aniqrc-theme','light');}catch(e){} }
+    else { root.setAttribute('data-theme','dark'); try{localStorage.setItem('aniqrc-theme','dark');}catch(e){} }
+    applyMeta();
+  }); }
+
+  // TITLE WIPE
+  var titles=[].slice.call(document.querySelectorAll('.sec-title'));
+  titles.forEach(function(el){
+    el.classList.remove('reveal');
+    el.classList.add('wipe');
+    var span=document.createElement('span'); span.className='t'; span.innerHTML=el.innerHTML;
+    el.innerHTML=''; el.appendChild(span);
+  });
+  if(reduce || !('IntersectionObserver' in window)){
+    titles.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.5});
+    titles.forEach(function(el){ io.observe(el); });
+  }
+
+  // MAGNETIC BUTTONS
+  if(!reduce && fine){
+    [].slice.call(document.querySelectorAll('.btn, .nav-cta, .ask-cta')).forEach(function(b){
+      b.classList.add('magnetic');
+      b.addEventListener('mousemove', function(e){ var r=b.getBoundingClientRect(); var x=e.clientX-(r.left+r.width/2), y=e.clientY-(r.top+r.height/2); b.style.transform='translate('+(x*0.25).toFixed(1)+'px,'+(y*0.4).toFixed(1)+'px)'; });
+      b.addEventListener('mouseleave', function(){ b.style.transform=''; });
+    });
+  }
+
+  // SPOTLIGHT on dark sections
+  if(!reduce && fine){
+    [].slice.call(document.querySelectorAll('.manifesto, .nl-card')).forEach(function(sec){
+      if(getComputedStyle(sec).position==='static') sec.style.position='relative';
+      var spot=document.createElement('div'); spot.className='spot'; spot.setAttribute('aria-hidden','true');
+      sec.insertBefore(spot, sec.firstChild);
+      sec.addEventListener('mousemove', function(e){ var r=sec.getBoundingClientRect(); sec.style.setProperty('--mx',(e.clientX-r.left)+'px'); sec.style.setProperty('--my',(e.clientY-r.top)+'px'); });
+      sec.addEventListener('mouseenter', function(){ spot.classList.add('on'); });
+      sec.addEventListener('mouseleave', function(){ spot.classList.remove('on'); });
+    });
+  }
 })();
 </script>
 </body>
